@@ -116,7 +116,7 @@ class Ui_Dialog(object):
         self.pushButton_12.setObjectName("pushButton_12")
         self.pushButton_12.clicked.connect(self.face_float)
         self.textBrowser_2 = QtWidgets.QTextBrowser(self.tab_2)
-        self.textBrowser_2.setGeometry(QtCore.QRect(10, 190, 427, 193))
+        self.textBrowser_2.setGeometry(QtCore.QRect(10, 190, 427, 121))
         self.textBrowser_2.setObjectName("textBrowser_2")
         self.tabWidget.addTab(self.tab_2, "")
         self.tab_3 = QtWidgets.QWidget()
@@ -163,7 +163,7 @@ class Ui_Dialog(object):
         self.pushButton_19.setObjectName("pushButton_19")
         self.pushButton_19.clicked.connect(self.cent_commission_gmv)
         self.textBrowser_3 = QtWidgets.QTextBrowser(self.tab_3)
-        self.textBrowser_3.setGeometry(QtCore.QRect(10, 220, 427, 151))
+        self.textBrowser_3.setGeometry(QtCore.QRect(10, 220, 427, 91))
         self.textBrowser_3.setObjectName("textBrowser_3")
         self.tabWidget.addTab(self.tab_3, "")
         self.tab_4 = QtWidgets.QWidget()
@@ -210,7 +210,7 @@ class Ui_Dialog(object):
         self.pushButton_26.setObjectName("pushButton_26")
         self.pushButton_26.clicked.connect(self.cent_commission_difference)
         self.textBrowser_4 = QtWidgets.QTextBrowser(self.tab_4)
-        self.textBrowser_4.setGeometry(QtCore.QRect(10, 220, 427, 151))
+        self.textBrowser_4.setGeometry(QtCore.QRect(10, 220, 427, 91))
         self.textBrowser_4.setObjectName("textBrowser_4")
         self.tabWidget.addTab(self.tab_4, "")
 
@@ -316,7 +316,7 @@ class Ui_Dialog(object):
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "福禄伙伴便捷测试工具-v1.0"))
+        Dialog.setWindowTitle(_translate("Dialog", "福禄伙伴便捷测试工具-v2.1"))
         self.tabWidget.setToolTip(_translate("Dialog", "<html><head/><body><p>成本上浮</p></body></html>"))
         self.pushButton.setText(_translate("Dialog", "输入成本"))
         self.pushButton_2.setText(_translate("Dialog", "上浮费率"))
@@ -460,7 +460,7 @@ class Ui_Dialog(object):
 
     def cent_commission_difference(self):
         try:
-            close_price_4 = self.dual_num(self.lineEdit_11.text())
+            close_price_4 = self.dual_num(self.lineEdit_17.text())
             promotion_price_4 = self.dual_num(self.lineEdit_18.text())
             cost_price_4 = self.dual_num(self.lineEdit_19.text())
             purchase_number_4 = self.dual_num(self.lineEdit_20.text())

@@ -34,7 +34,7 @@ class Ui_Dialog(object):
         self.pushButton = QtWidgets.QPushButton(Dialog)
         self.pushButton.setGeometry(QtCore.QRect(60, 40, 120, 51))
         self.pushButton.setObjectName("pushButton")
-        self.pushButton.clicked.connect(self.get_today_range)
+        self.pushButton.clicked.connect(self.get_log_range)
         self.textBrowser = QtWidgets.QTextBrowser(Dialog)
         self.lineEdit_1 = QtWidgets.QLineEdit(Dialog)
         self.lineEdit_1.setGeometry(QtCore.QRect(200, 40, 180, 51))
@@ -49,7 +49,7 @@ class Ui_Dialog(object):
         self.pushButton_3.setObjectName("pushButton_2")
         self.pushButton_3.clicked.connect(self.connect_to_mysql)
         self.comboBox = QtWidgets.QComboBox(Dialog)
-        self.comboBox.setGeometry(QtCore.QRect(600, 40, 161, 51))
+        self.comboBox.setGeometry(QtCore.QRect(600, 40, 191, 51))
         self.comboBox.setObjectName("comboBox")
         self.comboBox.addItem("万里牛-发货同步")
         self.comboBox.addItem("万里牛-售后同步")
@@ -200,7 +200,7 @@ class Ui_Dialog(object):
 
 
 
-    def get_today_range(self):
+    def get_log_range(self):
         # SSH 连接信息
         hostname = '172.19.0.128'
         port = 9998  # 默认 SSH 端口是 22
@@ -237,6 +237,7 @@ class Ui_Dialog(object):
             client.close()
 
     def connect_to_mysql(self):
+        order_no = self.lineEdit_1.text()
         host = 'rm-bp1fts3bsss2x4q98qo.mysql.rds.aliyuncs.com'
         database = 'wuhan_kntn'
         port = 3637
@@ -258,7 +259,7 @@ class Ui_Dialog(object):
 
                 # 执行 SQL 查询
                 cursor = conn.cursor()
-                query = "SELECT bill_amount,bill_staus FROM ke_bill_info WHERE order_code='121120240708095905278569'"  # 替换为你的实际查询和表名
+                query = "SELECT bill_amount,bill_staus FROM ke_bill_info WHERE order_code='{}'".format(order_no)  # 替换为你的实际查询和表名
 
                 cursor.execute(query)
 
@@ -266,12 +267,14 @@ class Ui_Dialog(object):
                 for (bill_amount, bill_staus) in cursor:
                     if bill_staus == 0:
                         self.textBrowser.append(f'金额: {bill_amount}, 状态: ''初始化状态:0')
+                    elif bill_staus == 1:
+                        self.textBrowser.append(f'金额: {bill_amount}, 状态: ''待打款:1')
                     elif bill_staus == 5:
                         self.textBrowser.append(f'金额: {bill_amount}, 状态: ''余额成功:5')
                     elif bill_staus == 4:
                         self.textBrowser.append(f'金额: {bill_amount}, 状态: ''现金成功:4')
                     elif bill_staus == 2:
-                        self.textBrowser.append(f'金额: {bill_amount}, 状态: ''已打款:4')
+                        self.textBrowser.append(f'金额: {bill_amount}, 状态: ''已打款:2')
                     else:
                         self.textBrowser.append(f'金额: {bill_amount}, 状态: ''未知状态:')
 
